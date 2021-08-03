@@ -14,12 +14,22 @@ import java.util.ArrayList;
 
 public class SongRecycleViewAdapter extends RecyclerView.Adapter<SongRecycleViewAdapter.SongViewHolder> {
     private ArrayList<Song> m_Songs;
+    private SongRecycleListener m_Callback;
 
     public SongRecycleViewAdapter(ArrayList<Song> i_Songs)
     {
         m_Songs = i_Songs;
     }
 
+    public interface SongRecycleListener
+    {
+        public void onSongClicked(int i_Position, View i_View, Song i_Song);
+    }
+
+    public void setListener(SongRecycleListener i_Callback)
+    {
+        m_Callback = i_Callback;
+    }
 
     public class SongViewHolder extends RecyclerView.ViewHolder {
         MaterialTextView m_NameTv;
@@ -28,7 +38,19 @@ public class SongRecycleViewAdapter extends RecyclerView.Adapter<SongRecycleView
             super(itemView);
 
             m_NameTv = itemView.findViewById(R.id.song_cell_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(m_Callback != null)
+                    {
+                        Song song = m_Songs.get(getAdapterPosition());
+                        m_Callback.onSongClicked(getAdapterPosition(), itemView,song);
+                    }
+                }
+            });
         }
+
     }
 
     @NonNull

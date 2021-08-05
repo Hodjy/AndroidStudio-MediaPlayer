@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardUseCompatPadding="true"
     app:contentPadding="10dp"
-    android:elevation="10dp">
+    android:elevation="10dp"
+    android:backgroundTint="?attr/colorPrimaryVariant">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="60dp"
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:textColor="?attr/colorOnPrimary"
         android:id="@+id/song_cell_name"/>
 
 </com.google.android.material.card.MaterialCardView>

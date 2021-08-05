@@ -1,7 +1,6 @@
 package com.hod.mediaplayer.fragments;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,9 @@ import com.hod.mediaplayer.services.MusicPlayerService;
 
 import java.util.ArrayList;
 
-public class SongDisplayFragment extends Fragment implements SongRecycleViewAdapter.SongRecycleListener {
+public class SongDisplayFragment extends Fragment implements SongRecycleViewAdapter.SongRecycleListener
+{
+    ArrayList<Song> m_Songs;
 
     @Nullable
     @Override
@@ -37,18 +38,14 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        ArrayList<Song> songs = new ArrayList<>();
+        m_Songs = new ArrayList<>();
         
-        songs.add(new Song("Hod", "https://www.syntax.org.il/xtra/bob.m4a"));
-        songs.add(new Song("Ofir"));
-        songs.add(new Song("Niv"));
-        songs.add(new Song("Matan"));
-        songs.add(new Song("Saar"));
-        songs.add(new Song("Ezra"));
-        songs.add(new Song("Ido"));
-        songs.add(new Song("Nv"));
+        m_Songs.add(new Song("Hod", "https://www.syntax.org.il/xtra/bob.m4a"));
+        m_Songs.add(new Song("Ofir", "https://www.syntax.org.il/xtra/bob1.m4a"));
+        m_Songs.add(new Song("Niv","https://www.syntax.org.il/xtra/bob2.mp3"));
 
-        SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(songs);
+
+        SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(m_Songs);
         songRecycleViewAdapter.setListener(this);
         recyclerView.setAdapter(songRecycleViewAdapter);
 
@@ -60,8 +57,11 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
     public void onSongClicked(int i_Position, View i_View, Song i_Song)
     {
         Intent intent = new Intent(getActivity(), MusicPlayerService.class);
-        intent.putExtra("link", i_Song.getSong());
+        intent.putExtra("songs", m_Songs);
+        intent.putExtra("song_index", i_Position);
+        intent.putExtra("command", "new_instance");
         Toast.makeText(getActivity(), i_Song.getSong(), Toast.LENGTH_SHORT).show();
         getActivity().startService(intent);
+
     }
 }

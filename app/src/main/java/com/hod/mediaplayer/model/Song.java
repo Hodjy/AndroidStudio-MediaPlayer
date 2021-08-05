@@ -2,9 +2,11 @@ package com.hod.mediaplayer.model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
+
 
 //TODO check if needed artist and song name.
-public class Song {
+public class Song implements Serializable {
     private Uri m_Image;
     private String m_Song;
     private String m_SongName;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_baseline_music_note_24"
+        android:id="@+id/fragment_add_song_image"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:tint="?attr/colorOnSecondary"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:id="@+id/fragment_add_song_add_camera_image"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@+id/fragment_add_song_add_camera_image"
+            android:tint="?attr/colorOnSecondary"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_baseline_add_photo_alternate_24"
+            android:id="@+id/fragment_add_song_add_link_image"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_song_name"
+        android:textColor="?attr/colorOnSecondary"
+        android:id="@+id/fragment_add_song_name_et"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_artists_name"
+        android:textColor="?attr/colorOnSecondary"
+        android:id="@+id/fragment_add_song_artist_name_et"/>
+
+</LinearLayout>

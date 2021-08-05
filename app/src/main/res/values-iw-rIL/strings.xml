@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">שלום פרגמנט ריק!</string>
     <string name="create_a_new_song">צור שיר חדש</string>
     <string name="header_title">אפשרויות</string>
+    <string name="enter_song_name">הכנס שם שיר:</string>
+    <string name="enter_artists_name">הכנס את שם האמן:</string>
 </resources>

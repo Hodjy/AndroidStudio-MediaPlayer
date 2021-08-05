@@ -16,11 +16,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.navigation.NavigationView;
 import com.hod.mediaplayer.fragments.MusicControlFragment;
 
 public class MainActivity extends AppCompatActivity implements MusicControlFragment.IMusicControlFragmentListener
 {
     private DrawerLayout m_DrawerLayout;
+    private NavigationView m_NavigationView;
+    private NavController m_FragmentNavigationController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity implements MusicControlFragm
         setContentView(R.layout.activity_main);
 
         m_DrawerLayout = findViewById(R.id.activity_main_drawer_layout);
+        m_NavigationView = findViewById(R.id.activity_main_navigation_view);
+        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.activity_main_nav_host_fragment);
+        m_FragmentNavigationController =  navHostFragment.getNavController();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,6 +45,17 @@ public class MainActivity extends AppCompatActivity implements MusicControlFragm
                 R.id.activity_main_music_controller_RL,
                 new MusicControlFragment(), "music_control_fragment")
                 .commit();
+
+        m_NavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                m_FragmentNavigationController.navigate(R.id.addSongFragment);
+                m_DrawerLayout.closeDrawers();
+                return false;
+            }
+        });
 
     }
 

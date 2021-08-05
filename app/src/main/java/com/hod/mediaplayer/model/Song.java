@@ -7,12 +7,12 @@ import java.io.Serializable;
 
 //TODO check if needed artist and song name.
 public class Song implements Serializable {
-    private Uri m_Image;
+    private String m_Image;
     private String m_Song;
     private String m_SongName;
     private String m_ArtistName;
 
-    public Song(Uri i_Image, String i_Song, String i_SongName, String i_ArtistName)
+    public Song(String i_Image, String i_Song, String i_SongName, String i_ArtistName)
     {
         m_Image = i_Image;
         m_Song = i_Song;
@@ -34,7 +34,7 @@ public class Song implements Serializable {
     }
 
 
-    public Uri getImage() {
+    public String getImage() {
         return m_Image;
     }
 

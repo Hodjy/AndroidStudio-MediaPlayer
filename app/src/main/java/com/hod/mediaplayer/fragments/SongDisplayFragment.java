@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hod.mediaplayer.R;
 import com.hod.mediaplayer.model.Song;
+import com.hod.mediaplayer.model.SongManager;
 import com.hod.mediaplayer.model.SongRecycleViewAdapter;
 import com.hod.mediaplayer.services.MusicPlayerService;
 
@@ -38,11 +39,11 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        m_Songs = new ArrayList<>();
-        
+        m_Songs = SongManager.getInstance().loadDefaultSongs();
+/*
         m_Songs.add(new Song("Hod", "https://www.syntax.org.il/xtra/bob.m4a"));
         m_Songs.add(new Song("Ofir", "https://www.syntax.org.il/xtra/bob1.m4a"));
-        m_Songs.add(new Song("Niv","https://www.syntax.org.il/xtra/bob2.mp3"));
+        m_Songs.add(new Song("Niv","https://www.syntax.org.il/xtra/bob2.mp3"));*/
 
 
         SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(m_Songs);

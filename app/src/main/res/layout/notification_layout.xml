@@ -44,7 +44,7 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_previous"
-            android:background="?attr/colorPrimaryVariant"
+            android:background="@null"
             app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_previous"/>
 
@@ -54,7 +54,7 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_pause"
-            android:background="?attr/colorPrimaryVariant"
+            android:background="@null"
             app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_pause"/>
 
@@ -64,7 +64,7 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_play"
-            android:background="?attr/colorPrimaryVariant"
+            android:background="@null"
             app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_play"/>
 
@@ -74,7 +74,7 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_next"
-            android:background="?attr/colorPrimaryVariant"
+            android:background="@null"
             app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_next"/>
 

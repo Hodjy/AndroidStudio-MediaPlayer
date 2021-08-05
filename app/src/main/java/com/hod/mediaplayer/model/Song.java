@@ -20,20 +20,6 @@ public class Song implements Serializable {
         m_ArtistName = i_ArtistName;
     }
 
-    //TODO Remove
-    public Song(String i_Name)
-    {
-        m_SongName = i_Name;
-    }
-
-    //TODO Remove
-    public Song(String i_Name, String i_Song)
-    {
-        m_SongName = i_Name;
-        m_Song = i_Song;
-    }
-
-
     public String getImage() {
         return m_Image;
     }

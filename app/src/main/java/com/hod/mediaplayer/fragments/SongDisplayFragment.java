@@ -39,12 +39,7 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        m_Songs = SongManager.getInstance().loadDefaultSongs();
-/*
-        m_Songs.add(new Song("Hod", "https://www.syntax.org.il/xtra/bob.m4a"));
-        m_Songs.add(new Song("Ofir", "https://www.syntax.org.il/xtra/bob1.m4a"));
-        m_Songs.add(new Song("Niv","https://www.syntax.org.il/xtra/bob2.mp3"));*/
-
+        m_Songs = SongManager.getInstance().loadSongs(getActivity().getApplicationContext());
 
         SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(m_Songs);
         songRecycleViewAdapter.setListener(this);

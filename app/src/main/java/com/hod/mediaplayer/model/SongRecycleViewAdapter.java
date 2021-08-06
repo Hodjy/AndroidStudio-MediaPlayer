@@ -76,7 +76,7 @@ public class SongRecycleViewAdapter extends RecyclerView.Adapter<SongRecycleView
         Song song = m_Songs.get(position);
         holder.m_SongNameTv.setText(song.getSongName());
         holder.m_ArtistNameTv.setText(song.getArtistName());
-        Glide.with(m_Context).load(song.getImageUriParsed()).into(holder.m_SongImage);
+        Glide.with(m_Context).load(song.getImageUriParsed()).error(R.drawable.ic_baseline_music_note_24).into(holder.m_SongImage);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class Song implements Serializable {
 
     public Song(String i_ImagePath, String i_Song, String i_SongName, String i_ArtistName)
     {
+        if(i_ImagePath != null)
         m_ImagePathUriParsed = Uri.parse(i_ImagePath).toString();
         m_Song = i_Song;
         m_SongName = i_SongName;

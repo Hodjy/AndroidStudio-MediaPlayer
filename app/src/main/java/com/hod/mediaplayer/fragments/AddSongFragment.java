@@ -47,7 +47,7 @@ public class AddSongFragment extends Fragment
     private ActivityResultLauncher<Intent> m_TakePictureLauncher;
     private File m_CapturedPictureFile;
     private Uri m_CapturedPicture;
-    private String m_PicturePath = "android.resource://com.hod.mediaplayer/drawable/ic_baseline_music_note_24";
+    private String m_PicturePath;
 
     public interface IAddSongFragmentListener
     {

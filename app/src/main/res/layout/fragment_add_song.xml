@@ -69,7 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_song_link"
-            android:text="https://drive.google.com/u/0/uc?id=1rsrpQQN8N_XTpxNsoOkXuDVWZ-IsAGz7&amp;export=download"
             android:textColorHint="?attr/colorOnSecondary"
             android:textColor="?attr/colorOnSecondary"
             android:layout_margin="10dp"

@@ -6,24 +6,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.hod.mediaplayer.fragments.AddSongFragment;
 import com.hod.mediaplayer.fragments.MusicControlFragment;
+import com.hod.mediaplayer.model.Song;
+import com.hod.mediaplayer.model.SongManager;
 
-public class MainActivity extends AppCompatActivity implements MusicControlFragment.IMusicControlFragmentListener
+public class MainActivity extends AppCompatActivity
+        implements MusicControlFragment.IMusicControlFragmentListener,
+        AddSongFragment.IAddSongFragmentListener
 {
     private DrawerLayout m_DrawerLayout;
     private NavigationView m_NavigationView;
     private NavController m_FragmentNavigationController;
+    private NavHostFragment m_NavHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements MusicControlFragm
 
         m_DrawerLayout = findViewById(R.id.activity_main_drawer_layout);
         m_NavigationView = findViewById(R.id.activity_main_navigation_view);
-        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.activity_main_nav_host_fragment);
-        m_FragmentNavigationController =  navHostFragment.getNavController();
+        m_NavHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.activity_main_nav_host_fragment);
+        m_FragmentNavigationController =  m_NavHostFragment.getNavController();
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -51,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements MusicControlFragm
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item)
             {
+                //TODO make it so its spesific for the "create song" button.
+                if(m_FragmentNavigationController.getCurrentDestination().getId() != R.id.addSongFragment)
                 m_FragmentNavigationController.navigate(R.id.addSongFragment);
+                //TODO make the drawer close on backspace.
                 m_DrawerLayout.closeDrawers();
                 return false;
             }
@@ -73,5 +83,20 @@ public class MainActivity extends AppCompatActivity implements MusicControlFragm
             m_DrawerLayout.openDrawer(Gravity.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSaveSongExecute(Song i_Song)
+    {
+        SongManager.getInstance().addSong(i_Song);
+        //TODO make proper string
+        Snackbar.make(this, m_DrawerLayout, "Saved", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCannotSave()
+    {
+        //TODO make proper string
+        Snackbar.make(this, m_DrawerLayout, "Cannot save before all details are filled.", Snackbar.LENGTH_SHORT).show();
     }
 }

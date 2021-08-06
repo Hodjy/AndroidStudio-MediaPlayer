@@ -117,8 +117,7 @@ public class MusicPlayerService extends Service
                     pause();
                 break;
             case "next":
-                if(m_Player.isPlaying() || m_IsPaused)
-                    changeSongFromList(true);
+                next();
                 break;
             case "previous":
                 if(m_Player.isPlaying() || m_IsPaused)
@@ -143,6 +142,12 @@ public class MusicPlayerService extends Service
         }*/
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void next()
+    {
+        if(m_Player.isPlaying() || m_IsPaused)
+            changeSongFromList(true);
     }
 
     private void changeSongFromList(boolean i_IsNext)
@@ -181,7 +186,7 @@ public class MusicPlayerService extends Service
         } catch (IOException e)
         {
             e.printStackTrace();
-            Toast.makeText(this, m_CurrentlyPlaying, Toast.LENGTH_SHORT).show();
+            next();
         }
     }
 

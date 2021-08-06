@@ -6,4 +6,6 @@
     <string name="header_title">Options</string>
     <string name="enter_song_name">Enter the song name:</string>
     <string name="enter_artists_name">Enter the artists name:</string>
+    <string name="save">Save</string>
+    <string name="enter_song_link">Enter the song link:</string>
 </resources>

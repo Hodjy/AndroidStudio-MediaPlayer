@@ -6,4 +6,6 @@
     <string name="header_title">אפשרויות</string>
     <string name="enter_song_name">הכנס שם שיר:</string>
     <string name="enter_artists_name">הכנס את שם האמן:</string>
+    <string name="save">שמור</string>
+    <string name="enter_song_link">הכנס קישור שיר:</string>
 </resources>

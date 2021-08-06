@@ -36,10 +36,10 @@ public class SongManager
 
     private ArrayList<Song> loadDefaultSongs()
     {
-        Uri uri = Uri.parse("android.resource://com.hod.mediaplayer/drawable/bob_dylan");
-        m_Songs.add(new Song(uri.toString(),"https://www.syntax.org.il/xtra/bob.m4a", "One More Cup Of Coffee","Bob Dylan"));
-        m_Songs.add(new Song(uri.toString(), "https://www.syntax.org.il/xtra/bob1.m4a", "Sara", "Bob Dylan"));
-        m_Songs.add(new Song(uri.toString(),"https://www.syntax.org.il/xtra/bob2.mp3","The Man In Me","Bob Dylan"));
+        String path = "android.resource://com.hod.mediaplayer/drawable/bob_dylan";
+        m_Songs.add(new Song(path.toString(),"https://www.syntax.org.il/xtra/bob.m4a", "One More Cup Of Coffee","Bob Dylan"));
+        m_Songs.add(new Song(path.toString(), "https://www.syntax.org.il/xtra/bob1.m4a", "Sara", "Bob Dylan"));
+        m_Songs.add(new Song(path.toString(),"https://www.syntax.org.il/xtra/bob2.mp3","The Man In Me","Bob Dylan"));
 
 
 
@@ -69,6 +69,7 @@ public class SongManager
             ois.close();
 
         } catch (FileNotFoundException e) {
+            if(m_Songs.size() == 0)
             m_Songs = loadDefaultSongs();
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,6 +80,7 @@ public class SongManager
         return m_Songs;
     }
 
+    //TODO make it save after adding.
     public void addSong(Song i_Song)
     {
         m_Songs.add(i_Song);

@@ -99,15 +99,14 @@ public class MusicPlayerService extends Service
 
         switch(command)
         {
-            case "new_instance":
+            case "set_songs":
                 if(m_Player.isPlaying() || m_IsPaused)
                 {
                     m_Player.stop();
                 }
                 Bundle bundle = intent.getExtras();
                 m_Songs = (ArrayList<Song>)bundle.getSerializable("songs");
-                m_CurrentlyPlaying = bundle.getInt("song_index");
-                playSongFromList();
+                m_CurrentlyPlaying = 0;
                 break;
             case "play":
                 if(!m_Player.isPlaying())

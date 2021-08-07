@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
     private NavigationView m_NavigationView;
     private NavController m_FragmentNavigationController;
     private NavHostFragment m_NavHostFragment;
+    private boolean m_IsFirstPlay = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,15 @@ public class MainActivity extends AppCompatActivity
 
     public void onCommandPressed(String i_Command)
     {
+        if(m_IsFirstPlay)
+        {
+            Intent intent = new Intent(this, MusicPlayerService.class);
+            intent.putExtra("songs", SongManager.getInstance().loadSongs(this));
+            intent.putExtra("command", "set_songs");
+            startService(intent);
+            m_IsFirstPlay = false;
+        }
+        
         Intent intent = new Intent(this, MusicPlayerService.class);
         intent.putExtra("command", i_Command);
         startService(intent);

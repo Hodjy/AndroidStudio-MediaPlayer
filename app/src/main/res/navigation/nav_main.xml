@@ -17,9 +17,21 @@
     <fragment
         android:id="@+id/songDisplayFragment"
         android:name="com.hod.mediaplayer.fragments.SongDisplayFragment"
-        android:label="SongDisplayFragment" />
+        android:label="SongDisplayFragment" >
+        <action
+            android:id="@+id/action_songDisplayFragment_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addSongFragment"
         android:name="com.hod.mediaplayer.fragments.AddSongFragment"
         android:label="AddSongFragment" />
+    <fragment
+        android:id="@+id/songDetailsFragment"
+        android:name="com.hod.mediaplayer.fragments.SongDetailsFragment"
+        android:label="SongDetailsFragment" >
+        <argument
+            android:name="song"
+            app:argType="com.hod.mediaplayer.model.Song" />
+    </fragment>
 </navigation>

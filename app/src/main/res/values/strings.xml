@@ -8,4 +8,5 @@
     <string name="enter_artists_name">Enter the artists name:</string>
     <string name="save">Save</string>
     <string name="enter_song_link">Enter the song link:</string>
+    <string name="back">Back</string>
 </resources>

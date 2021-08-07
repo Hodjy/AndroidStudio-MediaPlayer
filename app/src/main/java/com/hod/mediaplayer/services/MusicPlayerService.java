@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.R;
 import com.hod.mediaplayer.model.Song;
 
@@ -190,6 +191,7 @@ public class MusicPlayerService extends Service
         }
     }
 
+    //TODO snackbar on new song.(if possible)
     private void play()
     {
         m_Player.start();

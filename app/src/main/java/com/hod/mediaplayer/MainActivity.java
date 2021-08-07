@@ -10,6 +10,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import com.hod.mediaplayer.fragments.AddSongFragment;
 import com.hod.mediaplayer.fragments.MusicControlFragment;
 import com.hod.mediaplayer.model.Song;
 import com.hod.mediaplayer.model.SongManager;
+import com.hod.mediaplayer.services.MusicPlayerService;
 
 public class MainActivity extends AppCompatActivity
         implements MusicControlFragment.IMusicControlFragmentListener,
@@ -71,7 +73,9 @@ public class MainActivity extends AppCompatActivity
 
     public void onCommandPressed(String i_Command)
     {
-        Toast.makeText(this, i_Command, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MusicPlayerService.class);
+        intent.putExtra("command", i_Command);
+        startService(intent);
     }
 
     @SuppressLint("WrongConstant")

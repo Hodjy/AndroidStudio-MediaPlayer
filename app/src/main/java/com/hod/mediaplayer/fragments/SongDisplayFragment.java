@@ -10,9 +10,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.R;
 import com.hod.mediaplayer.model.Song;
 import com.hod.mediaplayer.model.SongManager;
@@ -52,12 +54,16 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
     @Override
     public void onSongClicked(int i_Position, View i_View, Song i_Song)
     {
-        Intent intent = new Intent(getActivity(), MusicPlayerService.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("song", i_Song);
+        NavHostFragment.findNavController(this).navigate(R.id.action_songDisplayFragment_to_songDetailsFragment, bundle);
+
+    }
+
+    //TODO use this to start up the songs.
+    /*        Intent intent = new Intent(getActivity(), MusicPlayerService.class);
         intent.putExtra("songs", m_Songs);
         intent.putExtra("song_index", i_Position);
         intent.putExtra("command", "new_instance");
-        Toast.makeText(getActivity(), i_Song.getSong(), Toast.LENGTH_SHORT).show();
-        getActivity().startService(intent);
-
-    }
+        getActivity().startService(intent);*/
 }

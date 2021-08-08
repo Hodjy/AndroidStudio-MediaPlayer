@@ -32,7 +32,7 @@ public class MainScreenFragment extends Fragment {
 
         MaterialButton materialButton = rootView.findViewById(R.id.fragment_main_btn);
 
-        materialButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.songDisplayFragment));
+        materialButton.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_mainScreenFragment_to_songDisplayFragment));
         return rootView;
     }
 }

@@ -2,10 +2,15 @@ package com.hod.mediaplayer.fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -88,5 +93,21 @@ public class DeleteDialogFragment extends DialogFragment
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+
+        int width = size.x;
+        int height = size.y;
+
+        window.setLayout((int) (width * 0.9), (int) (height * 0.25));
+        window.setGravity(Gravity.CENTER);
+    }
 
 }

@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -36,6 +37,8 @@ public class MusicPlayerService extends Service
     private ArrayList<Song> m_Songs;
     private int m_CurrentlyPlaying;
     private boolean m_IsPaused = false;
+    private RemoteViews m_RemoteViews;
+    private NotificationCompat.Builder m_Builder;
 
     @Nullable
     @Override
@@ -63,19 +66,19 @@ public class MusicPlayerService extends Service
             manager.createNotificationChannel(channel);
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelID);
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
+        m_Builder = new NotificationCompat.Builder(this, channelID);
+        m_RemoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
 
-        createOnClickPendingIntent(remoteViews, "play", 0, R.id.notification_play);
-        createOnClickPendingIntent(remoteViews, "pause", 1, R.id.notification_pause);
-        createOnClickPendingIntent(remoteViews, "next", 2, R.id.notification_next);
-        createOnClickPendingIntent(remoteViews, "previous", 3, R.id.notification_previous);
-        createOnClickPendingIntent(remoteViews, "close", 4, R.id.notification_closeIB);
+        createOnClickPendingIntent(m_RemoteViews, "play", 0, R.id.notification_play);
+        createOnClickPendingIntent(m_RemoteViews, "pause", 1, R.id.notification_pause);
+        createOnClickPendingIntent(m_RemoteViews, "next", 2, R.id.notification_next);
+        createOnClickPendingIntent(m_RemoteViews, "previous", 3, R.id.notification_previous);
+        createOnClickPendingIntent(m_RemoteViews, "close", 4, R.id.notification_closeIB);
 
-        builder.setCustomContentView(remoteViews);
-        builder.setSmallIcon(android.R.drawable.ic_media_play);
+        m_Builder.setCustomContentView(m_RemoteViews);
+        m_Builder.setSmallIcon(android.R.drawable.ic_media_play);
 
-        startForeground(NOTIF_ID, builder.build());
+        startForeground(NOTIF_ID, m_Builder.build());
     }
 
     private void createOnClickPendingIntent(
@@ -128,19 +131,6 @@ public class MusicPlayerService extends Service
                 stopSelf();
                 break;
         }
-
-/*        if(!m_Player.isPlaying())
-        {
-            try
-            {
-                m_Player.setDataSource(link);
-                m_Player.prepareAsync();
-            }
-            catch(IOException e)
-            {
-                e.printStackTrace();
-            }
-        }*/
 
         return super.onStartCommand(intent, flags, startId);
     }
@@ -201,11 +191,22 @@ public class MusicPlayerService extends Service
         }
     }
 
-    //TODO snackbar on new song.(if possible)
     private void play()
     {
-        m_Player.start();
-        m_IsPaused = false;
+        if(m_Songs.size() > 0)
+        {
+            m_Player.start();
+            m_RemoteViews.setTextViewText(R.id.notification_song_title_tv, m_Songs.get(m_CurrentlyPlaying).getSongName());
+            m_Builder.setContentText(m_Songs.get(m_CurrentlyPlaying).getSongName());
+            startForeground(NOTIF_ID, m_Builder.build());
+            m_IsPaused = false;
+        }
+        else
+        {
+            Toast.makeText(this, "No songs", Toast.LENGTH_SHORT).show();
+            stopSelf();
+        }
+
     }
 
     private void pause()
@@ -239,54 +240,5 @@ public class MusicPlayerService extends Service
     public void onPrepared(MediaPlayer mp)
     {
         play();
-    }
-
-    /**
-     * this is the first attempt at notification + channel, saved for reference.
-     */
-    private void startForegroundFirstAppempt() {
-        m_Player.start();
-        @SuppressLint("RemoteViewLayout")
-        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.notification_layout);
-
-        Notification.Builder builder = new Notification.Builder(this);
-
-        builder.setSmallIcon(android.R.drawable.ic_media_ff)
-                .setContentTitle("Playing Music")
-                .setContentText("This is my first song!")
-                .setContent(remoteViews);
-
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            startForegroundWithChannel(builder);
-        }
-        else
-        {
-            startForeground(1, builder.build());
-        }
-    }
-
-    @SuppressLint("WrongConstant")
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private void startForegroundWithChannel(Notification.Builder i_Notification)
-    {
-        final String NOTIFICATION_CHANNEL_ID = "Music";
-        String channelName = "Music Background Service";
-        NotificationChannel notificationChannel = new NotificationChannel(
-                NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        assert manager != null;
-
-        notificationChannel.setLightColor(Color.BLUE);
-        notificationChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        manager.createNotificationChannel(notificationChannel);
-
-         i_Notification.setOngoing(true)
-                 .setChannelId(NOTIFICATION_CHANNEL_ID)
-                .setPriority(NotificationManager.IMPORTANCE_MIN)
-                .setCategory(Notification.CATEGORY_SERVICE);
-
-         startForeground(2, i_Notification.build());
     }
 }

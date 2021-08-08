@@ -4,8 +4,6 @@ import android.net.Uri;
 
 import java.io.Serializable;
 
-
-//TODO check if needed artist and song name.
 public class Song implements Serializable {
     private String m_ImagePathUriParsed;
     private String m_Song;

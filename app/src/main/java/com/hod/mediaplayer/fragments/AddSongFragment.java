@@ -173,7 +173,8 @@ public class AddSongFragment extends Fragment
     private void takePicture()
     {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        m_CapturedPicture = FileProvider.getUriForFile(((Activity)m_Callback).getBaseContext(), ((Activity)m_Callback).getPackageName() + ".provider", m_CapturedPictureFile);
+        m_CapturedPicture = FileProvider.getUriForFile(((Activity)m_Callback).getBaseContext(),
+                ((Activity)m_Callback).getPackageName() + ".provider", m_CapturedPictureFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, m_CapturedPicture);
         m_TakePictureLauncher.launch(intent);
     }

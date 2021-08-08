@@ -26,18 +26,18 @@ public class MusicControlFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View rootview = inflater.inflate(R.layout.fragment_music_control, container, false);
-        Button prevBtn = rootview.findViewById(R.id.fragment_music_previous_btn);
-        Button nextBtn = rootview.findViewById(R.id.fragment_music_next_btn);
-        Button playBtn = rootview.findViewById(R.id.fragment_music_play_btn);
-        Button pauseBtn = rootview.findViewById(R.id.fragment_music_pause_btn);
+        View rootView = inflater.inflate(R.layout.fragment_music_control, container, false);
+        Button prevBtn = rootView.findViewById(R.id.fragment_music_previous_btn);
+        Button nextBtn = rootView.findViewById(R.id.fragment_music_next_btn);
+        Button playBtn = rootView.findViewById(R.id.fragment_music_play_btn);
+        Button pauseBtn = rootView.findViewById(R.id.fragment_music_pause_btn);
 
         prevBtn.setOnClickListener(v -> m_Callback.onCommandPressed("previous"));
         nextBtn.setOnClickListener(v -> m_Callback.onCommandPressed("next"));
         playBtn.setOnClickListener(v -> m_Callback.onCommandPressed("play"));
         pauseBtn.setOnClickListener(v -> m_Callback.onCommandPressed("pause"));
 
-        return rootview;
+        return rootView;
     }
 
     @Override

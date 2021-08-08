@@ -28,7 +28,8 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="?attr/colorOnPrimary"
-            android:padding="5dp"/>
+            android:padding="5dp"
+            android:id="@+id/notification_song_title_tv"/>
     </LinearLayout>
 
     <LinearLayout

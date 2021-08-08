@@ -10,9 +10,9 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:backgroundTint="?attr/colorSecondary"
         app:icon="@android:drawable/ic_media_previous"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="?attr/colorPrimary"
         app:iconGravity="textStart"
         android:id="@+id/fragment_music_previous_btn"/>
 
@@ -21,9 +21,9 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:backgroundTint="?attr/colorSecondary"
         app:icon="@android:drawable/ic_media_pause"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="?attr/colorPrimary"
         app:iconGravity="textStart"
         android:id="@+id/fragment_music_pause_btn"/>
 
@@ -32,9 +32,9 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:backgroundTint="?attr/colorSecondary"
         app:icon="@android:drawable/ic_media_play"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="?attr/colorPrimary"
         app:iconGravity="textStart"
         android:id="@+id/fragment_music_play_btn"/>
 
@@ -43,9 +43,9 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:backgroundTint="?attr/colorPrimaryVariant"
+        android:backgroundTint="?attr/colorSecondary"
         app:icon="@android:drawable/ic_media_next"
-        app:iconTint="?attr/colorOnPrimary"
+        app:iconTint="?attr/colorPrimary"
         app:iconGravity="textStart"
         android:id="@+id/fragment_music_next_btn"/>
 

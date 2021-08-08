@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="200dp">
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
@@ -9,6 +9,7 @@
         android:text="@string/are_you_sure_delete"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_margin="10dp"
         android:layout_centerInParent="true"/>
 
     <RelativeLayout
@@ -21,8 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/yes"
-            android:textSize="30sp"
-            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            android:textColor="?attr/colorSecondaryVariant"
             android:layout_margin="10dp"
             android:layout_alignParentStart="true"
             android:id="@+id/dialog_fragment_delete_yes_tv"/>
@@ -31,8 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no"
-            android:textSize="30sp"
-            android:textColor="@color/light_blue"
+            android:textSize="20sp"
+            android:textColor="?attr/colorSecondaryVariant"
             android:layout_alignParentEnd="true"
             android:layout_margin="10dp"
             android:id="@+id/dialog_fragment_delete_no_tv"/>

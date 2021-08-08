@@ -12,4 +12,7 @@
     <string name="are_you_sure_delete">למחוק את השיר?</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
+    <string name="saved">נשמר</string>
+    <string name="cannot_save">לא יכול לשמור לפני שכל הפרטים מולאו.</string>
+    <string name="welcome">ברוך הבא</string>
 </resources>

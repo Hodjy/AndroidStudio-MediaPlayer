@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_main_screen" >
         <action
             android:id="@+id/action_mainScreenFragment_to_songDisplayFragment"
-            app:destination="@id/songDisplayFragment" />
+            app:destination="@id/songDisplayFragment"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
     </fragment>
     <fragment
         android:id="@+id/songDisplayFragment"
@@ -20,7 +24,11 @@
         android:label="SongDisplayFragment" >
         <action
             android:id="@+id/action_songDisplayFragment_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment" />
+            app:destination="@id/songDetailsFragment"
+            app:enterAnim="@anim/enter_right_to_left"
+            app:exitAnim="@anim/exit_right_to_left"
+            app:popEnterAnim="@anim/enter_left_to_right"
+            app:popExitAnim="@anim/exit_left_to_right" />
     </fragment>
     <fragment
         android:id="@+id/addSongFragment"

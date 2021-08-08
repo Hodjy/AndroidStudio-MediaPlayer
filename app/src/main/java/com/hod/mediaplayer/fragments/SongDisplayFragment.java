@@ -68,7 +68,7 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
                     m_Songs.set(startPosition, dragLocationSong);
                     m_Songs.set(dragPosition, pressedSong);
                     songRecycleViewAdapter.notifyItemMoved(startPosition, dragPosition);
-                    SongManager.getInstance().setSongsList(m_Songs);
+                    SongManager.getInstance().setSongsList(m_Songs, getContext());
                 }
 
                 return true;
@@ -110,11 +110,4 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
             throw new ClassCastException("The Activity must implement: ISongDisplayFragmentListener");
         }
     }
-
-    //TODO use this to start up the songs.
-    /*        Intent intent = new Intent(getActivity(), MusicPlayerService.class);
-        intent.putExtra("songs", m_Songs);
-        intent.putExtra("song_index", i_Position);
-        intent.putExtra("command", "new_instance");
-        getActivity().startService(intent);*/
 }

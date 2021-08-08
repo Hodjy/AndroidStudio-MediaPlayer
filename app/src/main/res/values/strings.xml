@@ -9,7 +9,10 @@
     <string name="save">Save</string>
     <string name="enter_song_link">Enter the song link:</string>
     <string name="back">Back</string>
-    <string name="are_you_sure_delete">Are you sure you want to delete the song?</string>
+    <string name="are_you_sure_delete">Delete the song?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="saved">Saved</string>
+    <string name="cannot_save">Cannot save before all details are filled.</string>
+    <string name="welcome">Welcome</string>
 </resources>

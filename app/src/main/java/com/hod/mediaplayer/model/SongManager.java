@@ -1,5 +1,6 @@
 package com.hod.mediaplayer.model;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 
@@ -60,10 +61,10 @@ public class SongManager
         }
     }
 
-    public ArrayList<Song> loadSongs(Context i_Activity)
+    public ArrayList<Song> loadSongs(Context i_Context)
     {
         try {
-            FileInputStream fis  = i_Activity.openFileInput(SONGS_FILE_NAME);
+            FileInputStream fis  = i_Context.openFileInput(SONGS_FILE_NAME);
             ObjectInputStream ois  = new ObjectInputStream(fis);
             m_Songs = (ArrayList<Song>)ois.readObject();
             ois.close();
@@ -80,18 +81,20 @@ public class SongManager
         return m_Songs;
     }
 
-    //TODO make it save after adding.
-    public void addSong(Song i_Song)
+    public void addSong(Song i_Song, Context i_Context)
     {
         m_Songs.add(i_Song);
+        saveSongs(i_Context);
     }
-    public void removeSong(int i_SongPosition)
+    public void removeSong(int i_SongPosition, Context i_Context)
     {
         m_Songs.remove(m_Songs.get(i_SongPosition));
+        saveSongs(i_Context);
     }
 
-    public void setSongsList(ArrayList<Song> i_Songs)
+    public void setSongsList(ArrayList<Song> i_Songs, Context i_Context)
     {
         m_Songs = i_Songs;
+        saveSongs(i_Context);
     }
 }

@@ -61,7 +61,8 @@ public class MusicPlayerService extends Service
         {
             String channelName = "Music Channel";
             NotificationChannel channel = new NotificationChannel(
-                    channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
+                    channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setSound(null,null);
 
             manager.createNotificationChannel(channel);
         }
@@ -113,7 +114,13 @@ public class MusicPlayerService extends Service
                     {
                         setSongs();
                     }
-                    play();
+                    if(m_IsPaused)
+                    {
+                        play();
+                    }else
+                    {
+                        playSongFromList();
+                    }
                 }
                 break;
             case "pause":
@@ -141,7 +148,7 @@ public class MusicPlayerService extends Service
         {
             m_Player.stop();
         }
-        m_Songs = SongManager.getInstance().loadSongs(this);
+        m_Songs = SongManager.getInstance().getSongs(this);
         m_CurrentlyPlaying = 0;
     }
 
@@ -188,6 +195,17 @@ public class MusicPlayerService extends Service
         {
             e.printStackTrace();
             next();
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            if(m_Songs.size() == 0)
+            {
+                stopSelf();
+            }
+            else
+            {
+                next();
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,8 +26,8 @@ public class SongDetailsFragment extends Fragment
     {
         View rootView = inflater.inflate(R.layout.fragment_song_details, container, false);
         ImageView songImg = rootView.findViewById(R.id.fragment_song_details_image);
-        TextView songNameTv = rootView.findViewById(R.id.fragment_song_details_name_et);
-        TextView artistNameTv = rootView.findViewById(R.id.fragment_song_details_artist_name_et);
+        EditText songNameTv = rootView.findViewById(R.id.fragment_song_details_name_et);
+        EditText artistNameTv = rootView.findViewById(R.id.fragment_song_details_artist_name_et);
         Button backBtn = rootView.findViewById(R.id.fragment_song_details_back);
 
         Song song = (Song)(getArguments().getSerializable("song"));

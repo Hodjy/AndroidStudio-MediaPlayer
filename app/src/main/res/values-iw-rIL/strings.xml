@@ -15,4 +15,6 @@
     <string name="saved">נשמר</string>
     <string name="cannot_save">לא יכול לשמור לפני שכל הפרטים מולאו.</string>
     <string name="welcome">ברוך הבא</string>
+    <string name="song_name">שם שיר:</string>
+    <string name="artist_name">שם אמן:</string>
 </resources>

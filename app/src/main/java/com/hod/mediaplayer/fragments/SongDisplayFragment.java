@@ -49,7 +49,7 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        m_Songs = SongManager.getInstance().loadSongs(getActivity().getApplicationContext());
+        m_Songs = SongManager.getInstance().getSongs(getActivity().getApplicationContext());
 
         SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(m_Songs);
         songRecycleViewAdapter.setListener(this);

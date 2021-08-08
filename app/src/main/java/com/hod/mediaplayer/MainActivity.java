@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity
     private NavigationView m_NavigationView;
     private NavController m_FragmentNavigationController;
     private NavHostFragment m_NavHostFragment;
-    private boolean m_IsFirstPlay = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +79,6 @@ public class MainActivity extends AppCompatActivity
 
     public void onCommandPressed(String i_Command)
     {
-        if(m_IsFirstPlay)
-        {
-            Intent intent = new Intent(this, MusicPlayerService.class);
-            intent.putExtra("songs", SongManager.getInstance().loadSongs(this));
-            intent.putExtra("command", "set_songs");
-            startService(intent);
-            m_IsFirstPlay = false;
-        }
-        
         Intent intent = new Intent(this, MusicPlayerService.class);
         intent.putExtra("command", i_Command);
         startService(intent);
@@ -138,5 +129,17 @@ public class MainActivity extends AppCompatActivity
             i_RecyclerView.getAdapter().notifyItemChanged(i_SongPosition);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(m_DrawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            m_DrawerLayout.closeDrawers();
+        }
+        else
+        {
+            super.onBackPressed();
+        }
     }
 }

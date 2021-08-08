@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +35,6 @@
                 android:layout_centerHorizontal="true"
                 android:id="@+id/fragment_add_song_space_1"/>
 
-
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -47,32 +46,46 @@
 
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_song_name"
-            android:textColorHint="?attr/colorOnSecondary"
-            android:textColor="?attr/colorOnSecondary"
-            android:id="@+id/fragment_add_song_name_et"
-            android:layout_margin="10dp"/>
+            app:boxBackgroundColor="?attr/colorPrimaryVariant"
+            android:layout_margin="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_add_song_name_et" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:boxBackgroundColor="?attr/colorPrimaryVariant"
             android:hint="@string/enter_artists_name"
-            android:textColorHint="?attr/colorOnSecondary"
-            android:textColor="?attr/colorOnSecondary"
-            android:layout_margin="10dp"
-            android:id="@+id/fragment_add_song_artist_name_et"/>
+            android:layout_margin="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_add_song_artist_name_et"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:boxBackgroundColor="?attr/colorPrimaryVariant"
             android:hint="@string/enter_song_link"
-            android:textColorHint="?attr/colorOnSecondary"
-            android:textColor="?attr/colorOnSecondary"
-            android:layout_margin="10dp"
-            android:id="@+id/fragment_add_song_link_et"/>
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_add_song_link_et"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="match_parent"

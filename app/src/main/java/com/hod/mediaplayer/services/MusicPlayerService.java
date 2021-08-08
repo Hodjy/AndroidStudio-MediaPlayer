@@ -23,6 +23,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.R;
 import com.hod.mediaplayer.model.Song;
+import com.hod.mediaplayer.model.SongManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,17 +101,17 @@ public class MusicPlayerService extends Service
         switch(command)
         {
             case "set_songs":
-                if(m_Player.isPlaying() || m_IsPaused)
-                {
-                    m_Player.stop();
-                }
-                Bundle bundle = intent.getExtras();
-                m_Songs = (ArrayList<Song>)bundle.getSerializable("songs");
-                m_CurrentlyPlaying = 0;
+                setSongs();
                 break;
             case "play":
                 if(!m_Player.isPlaying())
+                {
+                    if(m_Songs == null)
+                    {
+                        setSongs();
+                    }
                     play();
+                }
                 break;
             case "pause":
                 if(m_Player.isPlaying())
@@ -142,6 +143,16 @@ public class MusicPlayerService extends Service
         }*/
 
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void setSongs()
+    {
+        if(m_Player.isPlaying() || m_IsPaused)
+        {
+            m_Player.stop();
+        }
+        m_Songs = SongManager.getInstance().loadSongs(this);
+        m_CurrentlyPlaying = 0;
     }
 
     private void next()

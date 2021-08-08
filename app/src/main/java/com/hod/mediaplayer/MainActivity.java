@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,15 +22,21 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.fragments.AddSongFragment;
+import com.hod.mediaplayer.fragments.DeleteDialogFragment;
 import com.hod.mediaplayer.fragments.MusicControlFragment;
+import com.hod.mediaplayer.fragments.SongDisplayFragment;
 import com.hod.mediaplayer.model.Song;
 import com.hod.mediaplayer.model.SongManager;
+import com.hod.mediaplayer.model.SongRecycleViewAdapter;
 import com.hod.mediaplayer.services.MusicPlayerService;
 
 public class MainActivity extends AppCompatActivity
         implements MusicControlFragment.IMusicControlFragmentListener,
-        AddSongFragment.IAddSongFragmentListener
+        AddSongFragment.IAddSongFragmentListener,
+        SongDisplayFragment.ISongDisplayFragmentListener,
+        DeleteDialogFragment.IDialogFragmentListener
 {
+    private RecyclerView m_DisplayFragmentRecycleView;
     private DrawerLayout m_DrawerLayout;
     private NavigationView m_NavigationView;
     private NavController m_FragmentNavigationController;
@@ -69,6 +77,8 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+
+
 
     }
 
@@ -112,5 +122,28 @@ public class MainActivity extends AppCompatActivity
     {
         //TODO make proper string
         Snackbar.make(this, m_DrawerLayout, "Cannot save before all details are filled.", Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSongSwipe(int i_SongPosition, RecyclerView i_RecycleView)
+    {
+        m_DisplayFragmentRecycleView = i_RecycleView;
+        DeleteDialogFragment deleteDialogFragment = new DeleteDialogFragment(i_SongPosition, i_RecycleView);
+        deleteDialogFragment.show(getSupportFragmentManager(), "delete dialog fragment");
+    }
+
+    @Override
+    public void onDialogClicked(int i_SongPosition, RecyclerView i_RecyclerView, boolean i_IsDelete) {
+
+        if(i_IsDelete)
+        {
+            SongManager.getInstance().removeSong(i_SongPosition);
+            i_RecyclerView.getAdapter().notifyItemRemoved(i_SongPosition);
+        }
+        else
+        {
+            i_RecyclerView.getAdapter().notifyItemChanged(i_SongPosition);
+        }
+
     }
 }

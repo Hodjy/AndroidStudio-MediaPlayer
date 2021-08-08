@@ -9,4 +9,7 @@
     <string name="save">שמור</string>
     <string name="enter_song_link">הכנס קישור שיר:</string>
     <string name="back">חזור</string>
+    <string name="are_you_sure_delete">למחוק את השיר?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
 </resources>

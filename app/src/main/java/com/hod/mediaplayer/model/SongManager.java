@@ -85,9 +85,13 @@ public class SongManager
     {
         m_Songs.add(i_Song);
     }
-    public void removeSong(Song i_Song)
+    public void removeSong(int i_SongPosition)
     {
-        m_Songs.remove(i_Song);
+        m_Songs.remove(m_Songs.get(i_SongPosition));
     }
 
+    public void setSongsList(ArrayList<Song> i_Songs)
+    {
+        m_Songs = i_Songs;
+    }
 }

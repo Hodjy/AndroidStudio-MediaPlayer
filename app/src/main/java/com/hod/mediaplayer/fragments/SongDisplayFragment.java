@@ -1,5 +1,6 @@
 package com.hod.mediaplayer.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +28,12 @@ import java.util.ArrayList;
 public class SongDisplayFragment extends Fragment implements SongRecycleViewAdapter.SongRecycleListener
 {
     ArrayList<Song> m_Songs;
+    ISongDisplayFragmentListener m_Callback;
+
+    public interface ISongDisplayFragmentListener
+    {
+        public void onSongSwipe(int i_SongPosition, RecyclerView i_RecycleView);
+    }
 
     @Nullable
     @Override
@@ -45,8 +53,38 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
 
         SongRecycleViewAdapter songRecycleViewAdapter = new SongRecycleViewAdapter(m_Songs);
         songRecycleViewAdapter.setListener(this);
-        recyclerView.setAdapter(songRecycleViewAdapter);
 
+
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target)
+            {
+                int startPosition = viewHolder.getAdapterPosition();
+                int dragPosition = target.getAdapterPosition();
+                if(startPosition != dragPosition)
+                {
+                    Song pressedSong = m_Songs.get(startPosition);
+                    Song dragLocationSong = m_Songs.get(dragPosition);
+                    m_Songs.set(startPosition, dragLocationSong);
+                    m_Songs.set(dragPosition, pressedSong);
+                    songRecycleViewAdapter.notifyItemMoved(startPosition, dragPosition);
+                    SongManager.getInstance().setSongsList(m_Songs);
+                }
+
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction)
+            {
+                m_Callback.onSongSwipe(viewHolder.getAdapterPosition(), recyclerView);
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.setAdapter(songRecycleViewAdapter);
 
         return rootView;
     }
@@ -58,6 +96,19 @@ public class SongDisplayFragment extends Fragment implements SongRecycleViewAdap
         bundle.putSerializable("song", i_Song);
         NavHostFragment.findNavController(this).navigate(R.id.action_songDisplayFragment_to_songDetailsFragment, bundle);
 
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try
+        {
+            m_Callback = (ISongDisplayFragmentListener)context;
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException("The Activity must implement: ISongDisplayFragmentListener");
+        }
     }
 
     //TODO use this to start up the songs.

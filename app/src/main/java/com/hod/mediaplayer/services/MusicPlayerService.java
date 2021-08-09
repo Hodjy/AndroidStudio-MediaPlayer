@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.R;
@@ -137,6 +138,9 @@ public class MusicPlayerService extends Service
             case "close":
                 stopSelf();
                 break;
+            case "song_deleted":
+                songDeleted(intent.getIntExtra("position",-1));
+                break;
         }
 
         return super.onStartCommand(intent, flags, startId);
@@ -150,6 +154,20 @@ public class MusicPlayerService extends Service
         }
         m_Songs = SongManager.getInstance().getSongs(this);
         m_CurrentlyPlaying = 0;
+    }
+
+    private void songDeleted(int i_DeletedSongPosition)
+    {
+        if(m_CurrentlyPlaying >= i_DeletedSongPosition)
+        {
+            m_CurrentlyPlaying--;
+
+            if(m_CurrentlyPlaying < 0)
+                m_CurrentlyPlaying = m_Songs.size() - 1;
+
+            if(m_CurrentlyPlaying == i_DeletedSongPosition)
+                next();
+        }
     }
 
     private void next()
@@ -194,7 +212,7 @@ public class MusicPlayerService extends Service
         } catch (IOException e)
         {
             e.printStackTrace();
-            next();
+            changeSongFromList(true);
         }
         catch (IndexOutOfBoundsException e)
         {
@@ -207,6 +225,10 @@ public class MusicPlayerService extends Service
                 next();
             }
         }
+        catch (Exception ex)
+        {
+            stopSelf();
+        }
     }
 
     private void play()
@@ -217,6 +239,7 @@ public class MusicPlayerService extends Service
             m_RemoteViews.setTextViewText(R.id.notification_song_title_tv, m_Songs.get(m_CurrentlyPlaying).getSongName());
             m_Builder.setContentText(m_Songs.get(m_CurrentlyPlaying).getSongName());
             startForeground(NOTIF_ID, m_Builder.build());
+            sendCurrentSongBroadCast();
             m_IsPaused = false;
         }
         else
@@ -225,6 +248,13 @@ public class MusicPlayerService extends Service
             stopSelf();
         }
 
+    }
+
+    private void sendCurrentSongBroadCast()
+    {
+        Intent intent = new Intent("com.hod.mediaplayer.songchanged");
+        intent.putExtra("song", m_Songs.get(m_CurrentlyPlaying));
+        LocalBroadcastManager.getInstance(this.getBaseContext()).sendBroadcast(intent);
     }
 
     private void pause()

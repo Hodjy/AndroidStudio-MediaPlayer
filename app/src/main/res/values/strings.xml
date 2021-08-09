@@ -17,4 +17,5 @@
     <string name="welcome">Welcome</string>
     <string name="song_name">Song Name:</string>
     <string name="artist_name">Artist Name:</string>
+    <string name="currently_playing">Currently Playing:</string>
 </resources>

@@ -26,6 +26,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.hod.mediaplayer.R;
 import com.hod.mediaplayer.model.Song;
@@ -84,7 +86,11 @@ public class AddSongFragment extends Fragment
             public void onActivityResult(ActivityResult result) {
                 if(result.getResultCode() == Activity.RESULT_OK)
                 {
-                    Glide.with(((Activity)m_Callback).getBaseContext()).load(m_CapturedPicture).into(m_SongIv);
+                    Glide.with(((Activity)m_Callback).getBaseContext())
+                            .load(m_CapturedPicture)
+                            .apply(RequestOptions.skipMemoryCacheOf(true))
+                            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+                            .into(m_SongIv);
                     m_PicturePath = m_CapturedPicture.toString();
                 }
             }

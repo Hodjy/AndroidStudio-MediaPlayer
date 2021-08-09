@@ -11,7 +11,9 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -47,12 +49,13 @@ public class MainActivity extends AppCompatActivity
         m_NavigationView = findViewById(R.id.activity_main_navigation_view);
         m_NavHostFragment = (NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.activity_main_nav_host_fragment);
         m_FragmentNavigationController =  m_NavHostFragment.getNavController();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
+        //actionbar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
 
         getSupportFragmentManager().beginTransaction().add(
                 R.id.activity_main_music_controller_RL,
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+
 
 
 
@@ -123,6 +127,7 @@ public class MainActivity extends AppCompatActivity
         {
             SongManager.getInstance().removeSong(i_SongPosition, this);
             i_RecyclerView.getAdapter().notifyItemRemoved(i_SongPosition);
+            onCommandPressed("song_deleted");
         }
         else
         {

@@ -81,6 +81,10 @@ public class SongManager
         m_Songs.add(new Song(path, "https://www.syntax.org.il/xtra/bob1.m4a", "Sara", "Bob Dylan"));
         m_Songs.add(new Song(path,"https://www.syntax.org.il/xtra/bob2.mp3","The Man In Me","Bob Dylan"));
 
+        path = "android.resource://com.hod.mediaplayer/drawable/red_hot_chilli_cant_stop";
+        m_Songs.add(new Song(path,"https://drive.google.com/uc?export=download&id=1ALbcyUNyF_SFYdzwrseN4Z68r1Eyi21b",
+                "Can't Stop","Red Hot Chilli Peppers"));
+
         return m_Songs;
     }
 
@@ -130,11 +134,16 @@ public class SongManager
 
     public void addSong(Song i_Song, Context i_Context)
     {
+        if(m_Songs == null)
+            loadSongs(i_Context);
         m_Songs.add(i_Song);
         saveSongs(i_Context);
     }
     public void removeSong(int i_SongPosition, Context i_Context)
     {
+        if(m_Songs == null)
+            loadSongs(i_Context);
+
         m_Songs.remove(m_Songs.get(i_SongPosition));
         saveSongs(i_Context);
     }

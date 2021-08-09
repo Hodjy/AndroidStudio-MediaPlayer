@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MediaPlayer</string>
+    <string name="app_name">נגן מוזיקה</string>
     <string name="hello_blank_fragment">שלום פרגמנט ריק!</string>
     <string name="create_a_new_song">צור שיר חדש</string>
     <string name="header_title">אפשרויות</string>
@@ -17,4 +17,5 @@
     <string name="welcome">ברוך הבא</string>
     <string name="song_name">שם שיר:</string>
     <string name="artist_name">שם אמן:</string>
+    <string name="currently_playing">עכשיו מנגן:</string>
 </resources>

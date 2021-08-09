@@ -127,7 +127,10 @@ public class MainActivity extends AppCompatActivity
         {
             SongManager.getInstance().removeSong(i_SongPosition, this);
             i_RecyclerView.getAdapter().notifyItemRemoved(i_SongPosition);
-            onCommandPressed("song_deleted");
+            Intent intent = new Intent(this, MusicPlayerService.class);
+            intent.putExtra("command", "song_deleted");
+            intent.putExtra("song_position", i_SongPosition);
+            startService(intent);
         }
         else
         {

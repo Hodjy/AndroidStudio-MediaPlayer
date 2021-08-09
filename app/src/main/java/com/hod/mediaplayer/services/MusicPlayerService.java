@@ -139,7 +139,7 @@ public class MusicPlayerService extends Service
                 stopSelf();
                 break;
             case "song_deleted":
-                songDeleted(intent.getIntExtra("position",-1));
+                songDeleted(intent.getIntExtra("song_position",-1));
                 break;
         }
 
@@ -158,7 +158,7 @@ public class MusicPlayerService extends Service
 
     private void songDeleted(int i_DeletedSongPosition)
     {
-        if(m_CurrentlyPlaying >= i_DeletedSongPosition)
+        if(m_CurrentlyPlaying >= i_DeletedSongPosition && i_DeletedSongPosition != -1)
         {
             m_CurrentlyPlaying--;
 

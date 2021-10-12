@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:background="?attr/colorPrimary"
+    android:theme="@style/Theme.MediaPlayer">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:id="@+id/notification_top_container">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_close_24"
             android:background="@null"
-            android:id="@+id/notification_closeIB"/>
+            android:id="@+id/notification_closeIB"
+            app:tint="?attr/colorOnPrimary" />
 
         <TextView
             android:layout_width="match_parent"
@@ -22,12 +27,16 @@
             android:text="MediaPlayer"
             android:gravity="center"
             android:textSize="20sp"
-            android:padding="5dp"/>
+            android:textColor="?attr/colorOnPrimary"
+            android:padding="5dp"
+            android:id="@+id/notification_song_title_tv"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_below="@+id/notification_top_container"
         >
 
         <ImageButton
@@ -36,6 +45,8 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_previous"
+            android:background="@null"
+            app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_previous"/>
 
         <ImageButton
@@ -44,6 +55,8 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_pause"
+            android:background="@null"
+            app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_pause"/>
 
         <ImageButton
@@ -52,6 +65,8 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_play"
+            android:background="@null"
+            app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_play"/>
 
         <ImageButton
@@ -60,10 +75,12 @@
             android:layout_margin="5dp"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_media_next"
+            android:background="@null"
+            app:tint="?attr/colorOnPrimary"
             android:id="@+id/notification_next"/>
 
 
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

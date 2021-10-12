@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">נגן מוזיקה</string>
+    <string name="hello_blank_fragment">שלום פרגמנט ריק!</string>
+    <string name="create_a_new_song">צור שיר חדש</string>
+    <string name="header_title">אפשרויות</string>
+    <string name="enter_song_name">הכנס שם שיר:</string>
+    <string name="enter_artists_name">הכנס את שם האמן:</string>
+    <string name="save">שמור</string>
+    <string name="enter_song_link">הכנס קישור שיר:</string>
+    <string name="back">חזור</string>
+    <string name="are_you_sure_delete">למחוק את השיר?</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="saved">נשמר</string>
+    <string name="cannot_save">לא יכול לשמור לפני שכל הפרטים מולאו.</string>
+    <string name="welcome">ברוך הבא</string>
+    <string name="song_name">שם שיר:</string>
+    <string name="artist_name">שם אמן:</string>
+    <string name="currently_playing">עכשיו מנגן:</string>
+</resources>

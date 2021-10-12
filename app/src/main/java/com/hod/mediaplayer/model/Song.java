@@ -2,38 +2,25 @@ package com.hod.mediaplayer.model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 
-//TODO check if needed artist and song name.
-public class Song {
-    private Uri m_Image;
+public class Song implements Serializable {
+    private String m_ImagePathUriParsed;
     private String m_Song;
     private String m_SongName;
     private String m_ArtistName;
 
-    public Song(Uri i_Image, String i_Song, String i_SongName, String i_ArtistName)
+    public Song(String i_ImagePath, String i_Song, String i_SongName, String i_ArtistName)
     {
-        m_Image = i_Image;
+        if(i_ImagePath != null)
+        m_ImagePathUriParsed = Uri.parse(i_ImagePath).toString();
         m_Song = i_Song;
         m_SongName = i_SongName;
         m_ArtistName = i_ArtistName;
     }
 
-    //TODO Remove
-    public Song(String i_Name)
-    {
-        m_SongName = i_Name;
-    }
-
-    //TODO Remove
-    public Song(String i_Name, String i_Song)
-    {
-        m_SongName = i_Name;
-        m_Song = i_Song;
-    }
-
-
-    public Uri getImage() {
-        return m_Image;
+    public String getImageUriParsed() {
+        return m_ImagePathUriParsed;
     }
 
     public String getSong() {
